@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js --exec babel-node",
-    "build": "babel src/server.js -o dist/server.js",
+    "build": "mkdir dist && babel src/server.js -o dist/server.js",
     "prod": "nodemon dist/server.js"
   },
   "devDependencies": {
