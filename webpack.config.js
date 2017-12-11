@@ -1,5 +1,7 @@
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var ENTRY_FILE = path.resolve(__dirname, 'src/server/index.js');
 var NODE_MODULES_FOLDER = path.resolve(__dirname, 'node_modules');
@@ -17,17 +19,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.js?$/,
                 exclude: NODE_MODULES_FOLDER,
                 loader: 'babel-loader'
             },
             {
-                test: /\.jsx$/,
+                test: /\.jsx?$/,
                 exclude: NODE_MODULES_FOLDER,
                 loader: 'babel-loader'
             }
         ]
     },
+
+    plugins: [
+        new CleanWebpackPlugin(DIST_FOLDER),
+        new UglifyJsPlugin()
+    ],
 
     output: {
         path: DIST_FOLDER
