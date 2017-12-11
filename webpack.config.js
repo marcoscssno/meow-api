@@ -37,7 +37,7 @@ module.exports = {
     ],
 
     output: {
-        path: DIST_FOLDER
+        path: DIST_FOLDER,
         filename: 'index.js'
     }
 
