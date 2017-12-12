@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node_modules/.bin/nodemon src/server/index.js --exec node_modules/.bin/babel-node",
-    "build": "node_modules/.bin/webpack",
+    "build-server": "node_modules/.bin/webpack --config webpack.config.server.js",
     "prod": "node_modules/.bin/nodemon dist/server/index.js"
   },
   "devDependencies": {
