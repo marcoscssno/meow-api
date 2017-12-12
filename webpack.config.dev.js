@@ -10,6 +10,7 @@ module.exports = {
     entry: {
         client: [
             'webpack-hot-middleware/client',
+            'react-hot-loader/patch',
             ENTRY_FILE
         ]
     },
