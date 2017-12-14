@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from '../shared/App'
@@ -32,6 +33,8 @@ const html = `
   </body>
 </html>
 `
+
+app.use(express.static(path.resolve(__dirname, '../client')))
 
 app.get('*', (req, res) => {
     res.send(html)
