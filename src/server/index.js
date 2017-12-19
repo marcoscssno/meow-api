@@ -17,6 +17,23 @@ if(process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler)) 
 }
 
+app.use(express.static(path.resolve(__dirname, '../client')))
+
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from '../client/reducers/root-reducer.js'
+
+const store = createStore(rootReducer)
+
+if (module.hot) {
+  module.hot.accept('../client/reducers/root-reducer.js', () => {
+    const NextReducer = require('../client/reducers/root-reducer.js').default
+    store.replaceReducer(NextReducer)
+  })
+}
+
+import serialize from 'serialize-javascript'
+
 const html = `
 <!doctype html>
 <html lang="pt-BR">
@@ -27,14 +44,15 @@ const html = `
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
   </head>
   <body>
-    <div id="root">${renderToString(<App />)}</div>
+    <div id="root">${renderToString(<Provider store={store}><App /></Provider>)}</div>
 
+    <script>
+      window.__PRELOADED_STATE__ = ${serialize(store.getState())}
+    </script>
     <script src="/bundle.js"></script>
   </body>
 </html>
 `
-
-app.use(express.static(path.resolve(__dirname, '../client')))
 
 app.get('*', (req, res) => {
     res.send(html)
