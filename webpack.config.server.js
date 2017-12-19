@@ -19,6 +19,14 @@ module.exports = {
         __filename: false
     },
     externals: [nodeExternals()],
+    
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        modules: [
+            path.resolve(__dirname, 'src/client'),
+            NODE_MODULES_FOLDER
+        ]
+    },
 
     module: {
         rules: [
