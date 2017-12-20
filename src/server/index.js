@@ -5,6 +5,7 @@ import { renderToString } from 'react-dom/server'
 import App from '../shared/App'
 
 const app = express()
+const port = process.env.PORT || 3001
 
 import webpack from 'webpack'
 import config from '../../webpack.config.dev'
@@ -40,4 +41,4 @@ app.get('*', (req, res) => {
     res.send(html)
 })
 
-app.listen(3001, () => console.log('Started'))
+app.listen(port, () => console.log(`App running on port ${port}`))

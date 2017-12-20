@@ -7,8 +7,8 @@ import App from '../shared/App'
 
 if(module.hot) {
     module.hot.accept('../shared/App', () => {
-        const RequiredApp = require('../shared/App').default
-        hydrate(<AppContainer><RequiredApp /></AppContainer>, document.getElementById('root'))        
+        const NextApp = require('../shared/App').default
+        hydrate(<AppContainer><NextApp /></AppContainer>, document.getElementById('root'))        
     })
 }
 
